@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp1());
-}
+// void main() {
+//   runApp(MyApp1());
+// }
 
 // di flutter terdapat 2 jenis widget yaitu stateful dan stateless
 // stateless memiliki tampilan yang statis sehingga tidak terjadi perubahan data pada screen (tidak memiliki fungsi setState())

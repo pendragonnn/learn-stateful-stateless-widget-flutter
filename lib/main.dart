@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.blue[200],
         title: Center(
           child: Text(
-            "Dialog",
+            "Snackbar",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
@@ -31,41 +31,29 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
             onPressed: () {
-              // memunculkan dialog
-              // context memberikan informasi mengenai isi dari seluruh aplikasi
-              showDialog(
-                  context: context,
-                  builder: (context) =>
-                      // manual
-                      // Dialog(
-                      //   child: Column(
-                      //     mainAxisSize: MainAxisSize.min,
-                      //     children: [
-                      //       Text("Ini Judul"),
-                      //       Text("Ini adalah deskripsi dialog. kamu bisa melihatnya disini")
-                      //     ],
-                      //   )
-                      // )
-
-                      // menggunakan alert dialog
-                      AlertDialog(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        // borderRadius: BorderRadius.only(topLeft: Radius.circular(20))),
-                        title: Text("Ini judul"),
-                        content: Text(
-                            "Ini adalah deskripsi dialog. Kamu bisa melihatnya di sini"),
-                        actions: [
-                          ElevatedButton(
-                              onPressed: () {}, child: Text("Cancel")),
-                          ElevatedButton(onPressed: () {}, child: Text("Ok")),
-                        ],
-                      ));
-
-              // menggunakan showAboutDialog
-              // showAboutDialog(context: context, children: [Text("Helo")]);
+              // menampilkan snackbar
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(
+                  "Delete Product Berhasil.",
+                  style: TextStyle(color: Colors.black),
+                ),
+                action: SnackBarAction(
+                  label: "Cancel",
+                  onPressed: () {
+                    print("tidak jadi hapus produk");
+                  },
+                  textColor: Colors.black,
+                ),
+                backgroundColor: Colors.amber,
+                // default durasi adalah 4 detik
+                duration: Duration(seconds: 3),
+                margin: EdgeInsets.all(20),
+                behavior: SnackBarBehavior.floating,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50)),
+              ));
             },
-            child: Text("Show Dialog")),
+            child: Text("Show Snackbar")),
       ),
     );
   }
