@@ -9,107 +9,66 @@ class MyApp5 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage3(),
+      home: HomePage4(),
     );
   }
 }
 
-class HomePage3 extends StatefulWidget {
-  const HomePage3({super.key});
-
+class HomePage4 extends StatefulWidget {
   @override
-  State<HomePage3> createState() => _HomePage3State();
+  State<HomePage4> createState() => _HomePage4State();
 }
 
-// menambahkan mixin TickerProviderStateMixin untuk keperluan vsync
-class _HomePage3State extends State<HomePage3> with TickerProviderStateMixin {
+class _HomePage4State extends State<HomePage4> {
+  final List data = [
+    {"judul": "Pilihan ke - 1", "data": 1},
+    {"judul": "Pilihan ke - 2", "data": 2},
+    {"judul": "Pilihan ke - 3", "data": 3},
+    {"judul": "Pilihan ke - 4", "data": 4},
+    {"judul": "Pilihan ke - 5", "data": 5},
+  ];
+
+  late int dataAwal;
+
+  // membuat data awal pilihan dalam dropdown / membuat state awal
+  @override
+  void initState() {
+    // TODO: implement initState
+    dataAwal = data[0]["data"];
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // membuat tab bar dengan default tab controller (bisa menggunakan stateless widget)
-    // return DefaultTabController(
-    //   length: 4,
-    //   child: Scaffold(
-    //     appBar: AppBar(
-    //       backgroundColor: Colors.teal,
-    //       title: Text(
-    //         "Tab Bar",
-    //         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-    //       ),
-    //       // membuat tab bar
-    //       bottom: TabBar(tabs: [
-    //         Tab(
-    //           icon: Icon(Icons.camera_alt),
-    //         ),
-    //         Tab(text: "Chats"),
-    //         Tab(
-    //           text: "Status",
-    //         ),
-    //         Tab(
-    //           text: "Calls",
-    //         ),
-    //       ]),
-    //     ),
-    //     body:
-    //         // membuat tampilan sesuai dengan tab bar nya (wajib berurutan)
-    //         TabBarView(children: [
-    //       Center(
-    //         child: Text("Kamera"),
-    //       ),
-    //       Center(
-    //         child: Text("Chats"),
-    //       ),
-    //       Center(
-    //         child: Text("Status"),
-    //       ),
-    //       Center(
-    //         child: Text("Calls"),
-    //       ),
-    //     ]),
-    //   ),
-    // );
-
-    // membuat default tab controller dengan controller
-    late TabController tabC = TabController(length: 4, vsync: this);
-
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.blue[200],
         title: Text(
-          "Tab Bar",
+          "Drop Down",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        // membuat tab bar
-        bottom: TabBar(controller: tabC, tabs: [
-          Tab(
-            icon: Icon(Icons.camera_alt),
-          ),
-          Tab(text: "Chats"),
-          Tab(
-            text: "Status",
-          ),
-          Tab(
-            text: "Calls",
-          ),
-        ]),
       ),
-      body:
-          // membuat tampilan sesuai dengan tab bar nya (wajib berurutan)
-          TabBarView(controller: tabC, children: [
-        Center(
-          child: Text("Kamera"),
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(30),
+          child: DropdownButton<int>(
+            value: dataAwal,
+            items: data
+                .map((e) => DropdownMenuItem(
+                      child: Text("Tampilan ${e["judul"]}"),
+                      value: e['data'] as int,
+                    ))
+                .toList(),
+            onChanged: (value) {
+              setState(() {
+                dataAwal = value!;
+              });
+            },
+          ),
         ),
-        Center(
-          child: Text("Chats"),
-        ),
-        Center(
-          child: Text("Status"),
-        ),
-        Center(
-          child: Text("Calls"),
-        ),
-      ]),
+      ),
     );
   }
 }
