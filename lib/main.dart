@@ -1,43 +1,49 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp5());
+  runApp(MyApp6());
 }
 
-class MyApp5 extends StatelessWidget {
-  const MyApp5({super.key});
+class MyApp6 extends StatelessWidget {
+  const MyApp6({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage4(),
+      home: HomePage5(),
     );
   }
 }
 
-class HomePage4 extends StatefulWidget {
+class HomePage5 extends StatefulWidget {
+  const HomePage5({super.key});
+
   @override
-  State<HomePage4> createState() => _HomePage4State();
+  State<HomePage5> createState() => _HomePage5State();
 }
 
-class _HomePage4State extends State<HomePage4> {
-  final List data = [
-    {"judul": "Pilihan ke - 1", "data": 1},
-    {"judul": "Pilihan ke - 2", "data": 2},
-    {"judul": "Pilihan ke - 3", "data": 3},
-    {"judul": "Pilihan ke - 4", "data": 4},
-    {"judul": "Pilihan ke - 5", "data": 5},
+class _HomePage5State extends State<HomePage5> {
+  // membuat state index current agar bisa berpindah menu
+  late int index;
+  List showWidget = [
+    Center(
+      child: Text("Home"),
+    ),
+    Center(
+      child: Text("Cart"),
+    ),
+    Center(
+      child: Text("Profile"),
+    )
   ];
-
-  late int dataAwal;
-
-  // membuat data awal pilihan dalam dropdown / membuat state awal
   @override
   void initState() {
     // TODO: implement initState
-    dataAwal = data[0]["data"];
     super.initState();
+
+    // menyiapkan state awal
+    index = 0;
   }
 
   @override
@@ -45,29 +51,38 @@ class _HomePage4State extends State<HomePage4> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[200],
-        title: Text(
-          "Drop Down",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-      ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(30),
-          child: DropdownButton<int>(
-            value: dataAwal,
-            items: data
-                .map((e) => DropdownMenuItem(
-                      child: Text("Tampilan ${e["judul"]}"),
-                      value: e['data'] as int,
-                    ))
-                .toList(),
-            onChanged: (value) {
-              setState(() {
-                dataAwal = value!;
-              });
-            },
+        title: Center(
+          child: Text(
+            "Bottom Navigation Bar",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
+      ),
+      body: showWidget[index],
+      // membuat bottom navigation bar
+      bottomNavigationBar: BottomNavigationBar(
+        // memberi warna latar belakang
+        backgroundColor: Colors.blue[200],
+        // mengubah warna ketika kondisi dipilih
+        selectedItemColor: Colors.amber[200],
+        // mengubah warna ketika kondisi tidak dipilih
+        unselectedItemColor: Colors.grey[300],
+        // menempatkan posisi awal (dimulai dan default nilainya 0)
+        currentIndex: index,
+        // mengubah ukuran icon (default 24)
+        iconSize: 20,
+        // fungsi ketika salah satu menu dipilih
+        onTap: (value) {
+          setState(() {
+            index = value;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart), label: "Cart"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+        ],
       ),
     );
   }
