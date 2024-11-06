@@ -1,83 +1,174 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp7());
+  runApp(MyApp8());
 }
 
-class MyApp7 extends StatelessWidget {
-  const MyApp7({super.key});
+class MyApp8 extends StatelessWidget {
+  const MyApp8({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage6(),
+      home: HomePage7(),
     );
   }
 }
 
-class HomePage6 extends StatelessWidget {
-  const HomePage6({super.key});
+class HomePage7 extends StatelessWidget {
+  const HomePage7({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[200],
-        title: Text(
-          "Bottom Sheet",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        title: Center(
+          child: Text(
+            "Drawer",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
         ),
       ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(20),
-          child: ElevatedButton(
-              onPressed: () {
-                // membuat bottom sheet modal
-                showModalBottomSheet(
-                  barrierColor: Colors.grey[200],
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)),
-                  context: context,
-                  // membuat modal tidak tertutup ketika user menyentuh layar di luar modal
-                  isDismissible: false,
-                  builder: (context) => Container(
-                    height: 300,
-                    child: ListView(
-                      children: [
-                        ListTile(
-                          onTap: () => print("Klik Photo"),
-                          leading: Icon(Icons.photo),
-                          title: Text("Photo"),
-                        ),
-                        ListTile(
-                          onTap: () => print("Klik Music"),
-                          leading: Icon(Icons.music_note),
-                          title: Text("Music"),
-                        ),
-                        ListTile(
-                          onTap: () => print("Klik Video"),
-                          leading: Icon(Icons.video_camera_back),
-                          title: Text("Video"),
-                        ),
-                        ListTile(
-                          onTap: () => print("Klik Share"),
-                          leading: Icon(Icons.share),
-                          title: Text("Share"),
-                        ),
-                        ListTile(
-                          // fungsi untuk menutup bottom sheet modal
-                          onTap: () => Navigator.pop(context),
-                          leading: Icon(Icons.cancel),
-                          title: Text("Cancel"),
-                        ),
-                      ],
-                    ),
+      // membuat drawer
+      drawer: Drawer(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              // memindahkan teks ke pojok kiri bawah
+              alignment: Alignment.bottomLeft,
+              padding: EdgeInsets.all(20),
+              // memberikan lebar widget agar tak terbatas
+              width: double.infinity,
+              height: 150,
+              color: Colors.blue[200],
+              child: Text(
+                "Dasboard Menu",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            // listView membutuhkan ukuran oleh sebab itu dibungkus dengan widget Expanded
+            // widget expanded mengisi sisa ukuran yang sudah diisi oleh container sebelumnya
+            Expanded(
+              child: ListView(
+                // menghilangkan padding bawaan listView
+                padding: EdgeInsets.zero,
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.home),
+                    title: Text("Home"),
+                    // memberi icon di ujung pilihan menu
+                    // trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {},
                   ),
-                );
-              },
-              child: Text("Show Button Sheet")),
+                  ListTile(
+                    leading: Icon(Icons.shopping_cart_checkout),
+                    title: Text("Produk"),
+                    // memberi icon di ujung pilihan menu
+                    // trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.home),
+                    title: Text("Home"),
+                    // memberi icon di ujung pilihan menu
+                    // trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.home),
+                    title: Text("Home"),
+                    // memberi icon di ujung pilihan menu
+                    // trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.shopping_cart_checkout),
+                    title: Text("Produk"),
+                    // memberi icon di ujung pilihan menu
+                    // trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.home),
+                    title: Text("Home"),
+                    // memberi icon di ujung pilihan menu
+                    // trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.home),
+                    title: Text("Home"),
+                    // memberi icon di ujung pilihan menu
+                    // trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.shopping_cart_checkout),
+                    title: Text("Produk"),
+                    // memberi icon di ujung pilihan menu
+                    // trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.home),
+                    title: Text("Home"),
+                    // memberi icon di ujung pilihan menu
+                    // trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.home),
+                    title: Text("Home"),
+                    // memberi icon di ujung pilihan menu
+                    // trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.shopping_cart_checkout),
+                    title: Text("Produk"),
+                    // memberi icon di ujung pilihan menu
+                    // trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.home),
+                    title: Text("Home"),
+                    // memberi icon di ujung pilihan menu
+                    // trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.home),
+                    title: Text("Home"),
+                    // memberi icon di ujung pilihan menu
+                    // trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.shopping_cart_checkout),
+                    title: Text("Produk"),
+                    // memberi icon di ujung pilihan menu
+                    // trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.home),
+                    title: Text("Home"),
+                    // memberi icon di ujung pilihan menu
+                    // trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {},
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
