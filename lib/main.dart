@@ -1,88 +1,84 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp6());
+  runApp(MyApp7());
 }
 
-class MyApp6 extends StatelessWidget {
-  const MyApp6({super.key});
+class MyApp7 extends StatelessWidget {
+  const MyApp7({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage5(),
+      home: HomePage6(),
     );
   }
 }
 
-class HomePage5 extends StatefulWidget {
-  const HomePage5({super.key});
-
-  @override
-  State<HomePage5> createState() => _HomePage5State();
-}
-
-class _HomePage5State extends State<HomePage5> {
-  // membuat state index current agar bisa berpindah menu
-  late int index;
-  List showWidget = [
-    Center(
-      child: Text("Home"),
-    ),
-    Center(
-      child: Text("Cart"),
-    ),
-    Center(
-      child: Text("Profile"),
-    )
-  ];
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    // menyiapkan state awal
-    index = 0;
-  }
+class HomePage6 extends StatelessWidget {
+  const HomePage6({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[200],
-        title: Center(
-          child: Text(
-            "Bottom Navigation Bar",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
+        title: Text(
+          "Bottom Sheet",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
-      body: showWidget[index],
-      // membuat bottom navigation bar
-      bottomNavigationBar: BottomNavigationBar(
-        // memberi warna latar belakang
-        backgroundColor: Colors.blue[200],
-        // mengubah warna ketika kondisi dipilih
-        selectedItemColor: Colors.amber[200],
-        // mengubah warna ketika kondisi tidak dipilih
-        unselectedItemColor: Colors.grey[300],
-        // menempatkan posisi awal (dimulai dan default nilainya 0)
-        currentIndex: index,
-        // mengubah ukuran icon (default 24)
-        iconSize: 20,
-        // fungsi ketika salah satu menu dipilih
-        onTap: (value) {
-          setState(() {
-            index = value;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart), label: "Cart"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-        ],
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: ElevatedButton(
+              onPressed: () {
+                // membuat bottom sheet modal
+                showModalBottomSheet(
+                  barrierColor: Colors.grey[200],
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  context: context,
+                  // membuat modal tidak tertutup ketika user menyentuh layar di luar modal
+                  isDismissible: false,
+                  builder: (context) => Container(
+                    height: 300,
+                    child: ListView(
+                      children: [
+                        ListTile(
+                          onTap: () => print("Klik Photo"),
+                          leading: Icon(Icons.photo),
+                          title: Text("Photo"),
+                        ),
+                        ListTile(
+                          onTap: () => print("Klik Music"),
+                          leading: Icon(Icons.music_note),
+                          title: Text("Music"),
+                        ),
+                        ListTile(
+                          onTap: () => print("Klik Video"),
+                          leading: Icon(Icons.video_camera_back),
+                          title: Text("Video"),
+                        ),
+                        ListTile(
+                          onTap: () => print("Klik Share"),
+                          leading: Icon(Icons.share),
+                          title: Text("Share"),
+                        ),
+                        ListTile(
+                          // fungsi untuk menutup bottom sheet modal
+                          onTap: () => Navigator.pop(context),
+                          leading: Icon(Icons.cancel),
+                          title: Text("Cancel"),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              child: Text("Show Button Sheet")),
+        ),
       ),
     );
   }
